@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-cloak>
+
+<head>
+	<meta charset="UTF-8">
+	<title>ContactList Manager</title>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-mocks.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.0.1/faker.min.js"></script>
+
+	<style type="text/css">
+		md-card h2:first-of-type {
+			margin-top: 0;
+		}
+	</style>
+
+	<script>
+		(function(){
+			'use strict'
+			
+			var moduleID = 'myApp';
+			var ctrlID = 'myCtrl';
+			var factID = 'myFact';
+			var shellCtrl = 'shellCtrl';
+			//faker.locale = 'en_IND';
+			
+			angular.module(moduleID,[
+				'ui.router',
+				'ngMockE2E',
+				'ngMaterial'
+			])
+			.config(function($stateProvider,$urlRouterProvider){
+				// For any unmatched url, redirect to /tab1
+ 				 $urlRouterProvider.otherwise("/");
+				// Now set up the states
+				$stateProvider
+					.state('home', {
+							url: "/",
+							templateUrl: "/home.html",
+							controller: ctrlID,
+							controllerAs: 'vm'
+					});
+			})
+			.config(function($mdThemingProvider) {
+				$mdThemingProvider.theme('default')
+					.primaryPalette('blue')
+					.accentPalette('red');
+			})
+			.factory(factID, function($http){
+				var service ={
+					getPerson: getPerson
+				}
+				return service;
+				
+				function getPerson(){
+					return $http.get('/person');
+				}
+			})
+			.controller(ctrlID,function(myFact){
+				var vm = this;
+				
+				myFact.getPerson().success(function(data){
+					vm.person = data;
+				}).error(function(e){
+					alert(e);
+				});
+				
+			})
+			.controller(shellCtrl,function($mdSidenav){
+				 var vm = this;
+				 
+				vm.toggleSidenav = function(menuId) {
+					$mdSidenav(menuId).toggle();
+				};
+			})
+			.run(function($httpBackend){
+				var persons = [];
+
+				for (var i = 0; i < 5; i++) {
+					persons.push(createPerson());
+				};
+				
+				function createPerson(){
+					return {
+						photo: faker.internet.avatar(),
+						first_name: faker.name.firstName(),
+	  					last_name:	faker.name.lastName(),
+						company: faker.company.companyName(),
+						phone: faker.phone.phoneNumberFormat(),
+						email: faker.internet.email(),
+						url: faker.internet.url(),
+						address: getAddress(),
+						birthday: faker.date.past(),
+						notes: faker.lorem.sentence()
+					};
+				}
+					
+				function getAddress(){
+					var adr = faker.address;
+					var space = ', ';
+					return  adr.streetAddress() + space
+							+ adr.secondaryAddress() + space 
+							+ adr.city() + space
+							+ adr.stateAbbr() + '-'
+							+ adr.zipCode() + space
+							+ adr.country();
+				};
+				
+				$httpBackend.whenGET('/person').respond(persons);
+			});
+			
+		})();
+	</script>
+</head>
+
+<body layout="row" ng-controller="shellCtrl as shellvm">
+
+	<div layout="column">
+		<section layout="row" flex>
+			<md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+				<md-toolbar class="md-tall md-accent">
+					<div class="md-toolbar-tools-bottom inset">
+						<div>Demo</div>
+						<div>Angular Material</div>
+					</div>
+				</md-toolbar>
+				<div layout-align="start center">
+					<md-button>My Contacts</md-button>
+				</div>
+			</md-sidenav>
+		</section>
+	</div>
+
+	<div layout="column" layout-fill>
+		<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+			<md-icon aria-label="Add">add</md-icon>
+		</md-button>
+
+		<section layout="row">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<md-button ng-click="shellvm.toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+						<md-icon aria-label="Menu">menu</md-icon>
+					</md-button>
+					<h1> <md-icon aria-label="Phone">phone</md-icon>Contact List Manger</h1>
+				</div>
+			</md-toolbar>
+		</section>
+
+		<section layout="row" flex id="content">
+			<md-content layout="column" flex class="md-padding">
+				<md-card>
+					<md-card-content>
+						<div ui-view></div>
+					</md-card-content>
+				</md-card>
+
+			</md-content>
+		</section>
+	</div>
+
+
+
+	<script type="text/ng-template" id="/home.html">
+		<h2>Contacts</h2>
+		<md-list>
+			<md-list-item ng-repeat="per in vm.person track by $index" class="md-3-line">
+				<img ng-src="{{per.photo}}" class="md-avatar" hide-sm>
+				<div class="md-list-item-text">
+					<h3>{{per.last_name}}, {{per.first_name}}</h3>
+					<h4>{{per.company}} <md-icon style="font-size:14px; height:14px">phone</md-icon>{{per.phone}}</h4>
+					<p>
+						{{per.notes}}
+					</p>
+				</div>
+				<md-divider ng-if="!$last"></md-divider>
+			</md-list-item>
+		</md-list>
+	</script>
+</body>
+
+</html>
