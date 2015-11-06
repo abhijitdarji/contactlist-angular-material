@@ -4,21 +4,33 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ContactList Manager</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+	
+	<!-- build:remove -->
 	<base href="/src/client/">
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
+	<!-- endbuild -->
+	
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-mocks.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.min.js"></script>
+	<!-- build:css styles/lib.css -->
+	<!-- bower:css -->
+	<link rel="stylesheet" href="/bower_components/angular-material/angular-material.css" />
+	<link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
+	<!-- endbower -->
+	<!-- endbuild -->
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.js"></script>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.0.1/faker.min.js"></script>
-
-	<link rel="stylesheet" href="styles/styles.css">
+	<!-- build:css styles/app.css -->
+	<!-- inject:css -->
+	<link rel="stylesheet" href="/.tmp/styles.css">
+	<!-- endinject -->
+	<!-- endbuild -->
 
 </head>
 
@@ -68,19 +80,41 @@
 		</section>
 	</div>
 
-	<script src="app/app.module.js"></script>
-	<script src="app/core/app.core.module.js"></script>
-	<script src="app/service/app.service.module.js"></script>
-	<script src="app/mocks/app.mocks.module.js"></script>
+	<!-- build:js js/lib.js -->
+	<!-- bower:js -->
+	<script src="/bower_components/jquery/dist/jquery.js"></script>
+	<script src="/bower_components/angular/angular.js"></script>
+	<script src="/bower_components/angular-animate/angular-animate.js"></script>
+	<script src="/bower_components/angular-aria/angular-aria.js"></script>
+	<script src="/bower_components/angular-mocks/angular-mocks.js"></script>
+	<script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+	<script src="/bower_components/angular-messages/angular-messages.js"></script>
+	<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="/bower_components/angular-material/angular-material.js"></script>
+	<script src="/bower_components/toastr/toastr.js"></script>
+	<script src="/bower_components/Faker/build/build/faker.js"></script>
+	<!-- endbower -->
+	<!-- endbuild -->
 
+	<!-- build:js js/app.js -->
+	<!-- inject:js -->
+	<script src="/src/client/app/app.module.js"></script>
+	<script src="/src/client/app/core/app.core.module.js"></script>
+	<script src="/src/client/app/mocks/app.mocks.module.js"></script>
+	<script src="/src/client/app/service/app.service.module.js"></script>
+	<script src="/src/client/app/core/core.config.js"></script>
+	<script src="/src/client/app/core/core.controller.js"></script>
+	<script src="/src/client/app/core/core.routes.js"></script>
+	<script src="/src/client/app/core/person.controller.js"></script>
+	<script src="/src/client/app/mocks/personmock.js"></script>
+	<script src="/src/client/app/mocks/staticmock.js"></script>
+	<script src="/src/client/app/service/dataService.js"></script>
+	<!-- endinject -->
 
-	<script src="app/core/core.config.js"></script>
-	<script src="app/core/core.routes.js"></script>
-	<script src="app/core/core.controller.js"></script>
-	<script src="app/core/person.controller.js"></script>
-	<script src="app/service/dataservice.js"></script>
-	<script src="app/mocks/staticmock.js"></script>
-	<script src="app/mocks/personmock.js"></script>
+	<!-- inject:templates:js -->
+	<!-- endinject -->
+	<!-- endbuild -->
 
 </body>
 
