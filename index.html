@@ -17,7 +17,7 @@
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	<link rel="stylesheet" href="styles/lib-8a9d0a59ba.css">
+	<link rel="stylesheet" href="styles/lib-03a027231e.css">
 
 	<link rel="stylesheet" href="styles/app-1bfc1d6af7.css">
 
@@ -35,16 +35,18 @@
 					</div>
 				</md-toolbar>
 				<div layout-align="start center">
-					<md-button>My Contacts</md-button>
+					<md-button ng-click="shellvm.showToast()">My Contacts</md-button>
 				</div>
 			</md-sidenav>
 		</section>
 	</div>
 
 	<div layout="column" layout-fill>
-		<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+		<!--<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
 			<md-icon aria-label="Add">add</md-icon>
-		</md-button>
+		</md-button>-->
+		
+		<floating-menu></floating-menu>
 
 		<section layout="row">
 			<md-toolbar>
@@ -69,9 +71,9 @@
 		</section>
 	</div>
 
-	<script src="js/lib-c004568e3c.js"></script>
+	<script src="js/lib-9ccd6e8d5f.js"></script>
 
-	<script src="js/app-09aa57c5d7.js"></script>
+	<script src="js/app-48c20ce224.js"></script>
 
 </body>
 
