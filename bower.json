@@ -26,7 +26,6 @@
     "angular-ui-router": "~0.2.15",
     "angular-material": "*",
     "jquery": "~2.1.4",
-    "toastr": "~2.1.2",
     "Faker": "*"
   },
   "resolutions": {

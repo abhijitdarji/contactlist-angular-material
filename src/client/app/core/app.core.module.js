@@ -7,6 +7,7 @@
 		'ui.router',
 		'ngMaterial',
 		'app.service',
+		'app.directive'
 	]);
 	
 })();

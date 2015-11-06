@@ -76,7 +76,7 @@ function serve(isDev, specRunner) {
         gulp.watch([config.less], ['styles'])
             .on('change', util.changeEvent);
             
-        gulp.watch([config.css, config.html], function (file) {
+        gulp.watch([config.css, config.html, config.js], function (file) {
             util.changeEvent(file);
             server.notify.apply(server, [file]);
         });

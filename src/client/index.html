@@ -22,7 +22,6 @@
 	<!-- build:css styles/lib.css -->
 	<!-- bower:css -->
 	<link rel="stylesheet" href="/bower_components/angular-material/angular-material.css" />
-	<link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
 	<!-- endbower -->
 	<!-- endbuild -->
 
@@ -46,16 +45,18 @@
 					</div>
 				</md-toolbar>
 				<div layout-align="start center">
-					<md-button>My Contacts</md-button>
+					<md-button ng-click="shellvm.showToast()">My Contacts</md-button>
 				</div>
 			</md-sidenav>
 		</section>
 	</div>
 
 	<div layout="column" layout-fill>
-		<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+		<!--<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
 			<md-icon aria-label="Add">add</md-icon>
-		</md-button>
+		</md-button>-->
+		
+		<floating-menu></floating-menu>
 
 		<section layout="row">
 			<md-toolbar>
@@ -92,7 +93,6 @@
 	<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
 	<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 	<script src="/bower_components/angular-material/angular-material.js"></script>
-	<script src="/bower_components/toastr/toastr.js"></script>
 	<script src="/bower_components/Faker/build/build/faker.js"></script>
 	<!-- endbower -->
 	<!-- endbuild -->
@@ -101,12 +101,15 @@
 	<!-- inject:js -->
 	<script src="/src/client/app/app.module.js"></script>
 	<script src="/src/client/app/core/app.core.module.js"></script>
+	<script src="/src/client/app/directive/app.directive.module.js"></script>
 	<script src="/src/client/app/mocks/app.mocks.module.js"></script>
 	<script src="/src/client/app/service/app.service.module.js"></script>
 	<script src="/src/client/app/core/core.config.js"></script>
 	<script src="/src/client/app/core/core.controller.js"></script>
 	<script src="/src/client/app/core/core.routes.js"></script>
 	<script src="/src/client/app/core/person.controller.js"></script>
+	<script src="/src/client/app/core/toastService.js"></script>
+	<script src="/src/client/app/directive/floatingMenu.directive.js"></script>
 	<script src="/src/client/app/mocks/personmock.js"></script>
 	<script src="/src/client/app/mocks/staticmock.js"></script>
 	<script src="/src/client/app/service/dataService.js"></script>
