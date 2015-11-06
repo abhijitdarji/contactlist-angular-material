@@ -42,7 +42,7 @@
 				+ adr.country();
 		};
 
-		$httpBackend.whenGET('/person').respond(persons);
+		$httpBackend.whenGET('/persons').respond(persons);
 
 	};
 

@@ -17,7 +17,7 @@
 		return service;
 
 		function getPerson() {
-			return $http.get('/person');
+			return $http.get('/persons');
 		}
 
 	};

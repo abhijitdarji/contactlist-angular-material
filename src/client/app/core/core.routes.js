@@ -2,7 +2,7 @@
 	'use strict'
 
 	var moduleID = 'app.core';
-	var injectParams = ['$mdThemingProvider'];
+	var injectParams = ['$stateProvider', '$urlRouterProvider'];
 
 	angular.module(moduleID)
 		.config(routeConfig);
@@ -10,19 +10,18 @@
 	routeConfig.$inject = injectParams;
 	function routeConfig($stateProvider, $urlRouterProvider) {
 			
-		// For any unmatched url, redirect to /tab1
-		$urlRouterProvider.otherwise("/");
-		// Now set up the states
+		$urlRouterProvider.otherwise("/contacts/all");
+
 		$stateProvider
 			.state('contacts', {
 				abstract: true,
-				template: '<ui-view/>',
+				template: '<div ui-view></div>',
 				url: '/contacts'
 			})
 			.state('contacts.all', {
 				url: '/all',
 				templateUrl: 'app/person/all.html',
-				controller: 'ctrlPersonAll',
+				controller: 'personCtrl',
 				controllerAs: 'vm',
 			});
 

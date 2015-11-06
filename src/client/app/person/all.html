@@ -1,6 +1,6 @@
 <h2>Contacts</h2>
 <md-list>
-	<md-list-item ng-repeat="per in vm.person track by $index" class="md-3-line">
+	<md-list-item ng-repeat="per in vm.contacts track by $index" class="md-3-line">
 		<img ng-src="{{per.photo}}" class="md-avatar" hide-sm>
 		<div class="md-list-item-text">
 			<h3>{{per.last_name}}, {{per.first_name}}</h3>
