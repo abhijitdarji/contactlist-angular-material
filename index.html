@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-cloak>
+<html lang="en" ng-app="clApp">
 
 <head>
 	<meta charset="UTF-8">
 	<title>ContactList Manager</title>
+	<base href="/src/client/">
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -17,112 +18,11 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.0.1/faker.min.js"></script>
 
-	<style type="text/css">
-		md-card h2:first-of-type {
-			margin-top: 0;
-		}
-	</style>
+	<link rel="stylesheet" href="styles/styles.css">
 
-	<script>
-		(function(){
-			'use strict'
-			
-			var moduleID = 'myApp';
-			var ctrlID = 'myCtrl';
-			var factID = 'myFact';
-			var shellCtrl = 'shellCtrl';
-			//faker.locale = 'en_IND';
-			
-			angular.module(moduleID,[
-				'ui.router',
-				'ngMockE2E',
-				'ngMaterial'
-			])
-			.config(function($stateProvider,$urlRouterProvider){
-				// For any unmatched url, redirect to /tab1
- 				 $urlRouterProvider.otherwise("/");
-				// Now set up the states
-				$stateProvider
-					.state('home', {
-							url: "/",
-							templateUrl: "/home.html",
-							controller: ctrlID,
-							controllerAs: 'vm'
-					});
-			})
-			.config(function($mdThemingProvider) {
-				$mdThemingProvider.theme('default')
-					.primaryPalette('blue')
-					.accentPalette('red');
-			})
-			.factory(factID, function($http){
-				var service ={
-					getPerson: getPerson
-				}
-				return service;
-				
-				function getPerson(){
-					return $http.get('/person');
-				}
-			})
-			.controller(ctrlID,function(myFact){
-				var vm = this;
-				
-				myFact.getPerson().success(function(data){
-					vm.person = data;
-				}).error(function(e){
-					alert(e);
-				});
-				
-			})
-			.controller(shellCtrl,function($mdSidenav){
-				 var vm = this;
-				 
-				vm.toggleSidenav = function(menuId) {
-					$mdSidenav(menuId).toggle();
-				};
-			})
-			.run(function($httpBackend){
-				var persons = [];
-
-				for (var i = 0; i < 5; i++) {
-					persons.push(createPerson());
-				};
-				
-				function createPerson(){
-					return {
-						photo: faker.internet.avatar(),
-						first_name: faker.name.firstName(),
-	  					last_name:	faker.name.lastName(),
-						company: faker.company.companyName(),
-						phone: faker.phone.phoneNumberFormat(),
-						email: faker.internet.email(),
-						url: faker.internet.url(),
-						address: getAddress(),
-						birthday: faker.date.past(),
-						notes: faker.lorem.sentence()
-					};
-				}
-					
-				function getAddress(){
-					var adr = faker.address;
-					var space = ', ';
-					return  adr.streetAddress() + space
-							+ adr.secondaryAddress() + space 
-							+ adr.city() + space
-							+ adr.stateAbbr() + '-'
-							+ adr.zipCode() + space
-							+ adr.country();
-				};
-				
-				$httpBackend.whenGET('/person').respond(persons);
-			});
-			
-		})();
-	</script>
 </head>
 
-<body layout="row" ng-controller="shellCtrl as shellvm">
+<body layout="row" ng-controller="shellCtrl as shellvm" ng-cloak>
 
 	<div layout="column">
 		<section layout="row" flex>
@@ -168,24 +68,20 @@
 		</section>
 	</div>
 
+	<script src="app/app.module.js"></script>
+	<script src="app/core/app.core.module.js"></script>
+	<script src="app/service/app.service.module.js"></script>
+	<script src="app/mocks/app.mocks.module.js"></script>
 
 
-	<script type="text/ng-template" id="/home.html">
-		<h2>Contacts</h2>
-		<md-list>
-			<md-list-item ng-repeat="per in vm.person track by $index" class="md-3-line">
-				<img ng-src="{{per.photo}}" class="md-avatar" hide-sm>
-				<div class="md-list-item-text">
-					<h3>{{per.last_name}}, {{per.first_name}}</h3>
-					<h4>{{per.company}} <md-icon style="font-size:14px; height:14px">phone</md-icon>{{per.phone}}</h4>
-					<p>
-						{{per.notes}}
-					</p>
-				</div>
-				<md-divider ng-if="!$last"></md-divider>
-			</md-list-item>
-		</md-list>
-	</script>
+	<script src="app/core/core.config.js"></script>
+	<script src="app/core/core.routes.js"></script>
+	<script src="app/core/core.controller.js"></script>
+	<script src="app/core/person.controller.js"></script>
+	<script src="app/service/dataservice.js"></script>
+	<script src="app/mocks/staticmock.js"></script>
+	<script src="app/mocks/personmock.js"></script>
+
 </body>
 
 </html>
