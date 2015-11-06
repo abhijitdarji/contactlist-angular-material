@@ -1,0 +1,14 @@
+<h2>Contacts</h2>
+<md-list>
+	<md-list-item ng-repeat="per in vm.contacts track by $index" class="md-3-line">
+		<img ng-src="{{per.photo}}" class="md-avatar" hide-sm>
+		<div class="md-list-item-text">
+			<h3>{{per.last_name}}, {{per.first_name}}</h3>
+			<h4>{{per.company}} <md-icon style="font-size:14px; height:14px">phone</md-icon>{{per.phone}}</h4>
+			<p>
+				{{per.notes}}
+			</p>
+		</div>
+		<md-divider ng-if="!$last"></md-divider>
+	</md-list-item>
+</md-list>
