@@ -12,11 +12,16 @@
 	function dataserv($http) {
 
 		var service = {
-			getPerson: getPerson
+			getPerson: getPerson,
+			getPersons: getPersons
 		}
 		return service;
 
-		function getPerson() {
+		function getPerson(id) {
+			return $http.get('/person/' + id);
+		}
+
+		function getPersons() {
 			return $http.get('/persons');
 		}
 

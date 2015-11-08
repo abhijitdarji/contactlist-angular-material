@@ -20,7 +20,7 @@
 			return {
 				photo: faker.internet.avatar(),
 				first_name: faker.name.firstName(),
-					last_name: faker.name.lastName(),
+				last_name: faker.name.lastName(),
 				company: faker.company.companyName(),
 				phone: faker.phone.phoneNumberFormat(),
 				email: faker.internet.email(),
@@ -43,6 +43,20 @@
 		};
 
 		$httpBackend.whenGET('/persons').respond(persons);
+
+		$httpBackend.whenGET(new RegExp('\\/person\\/[0-9]+')).respond(
+			function (method, url) {
+				var regexp = new RegExp('\\/person\\/([0-9]+)');
+				var id = Number(url.match(regexp)[1]);
+				return [200, persons[id]];
+			});
+		
+		//requires ngmock v 1.5
+		// $httpBackend.whenRoute('GET', '/person/:id')
+		// 	.respond(function (method, url, data, headers, params) {
+		// 		return [200, persons[Number(params.id)]];
+		// 	});
+		
 
 	};
 

@@ -9,7 +9,7 @@
 
 	routeConfig.$inject = injectParams;
 	function routeConfig($stateProvider, $urlRouterProvider) {
-			
+
 		$urlRouterProvider.otherwise("/contacts/all");
 
 		$stateProvider
@@ -23,6 +23,34 @@
 				templateUrl: 'app/person/all.html',
 				controller: 'personCtrl',
 				controllerAs: 'vm',
+				resolve: {
+					somePerson: function () {
+						return {};
+					}
+				}
+			})
+			.state('contacts.add', {
+				url: '/add',
+				templateUrl: 'app/person/add-edit.html',
+				controller: 'personCtrl',
+				controllerAs: 'vm',
+				resolve: {
+					somePerson: function () {
+						return {};
+					}
+				}
+			})
+			.state('contacts.edit', {
+				url: '/edit/{id:int}',
+				templateUrl: 'app/person/add-edit.html',
+				controller: 'personCtrl',
+				controllerAs: 'vm',
+				resolve: {
+					somePerson: ['$stateParams', 'dataserv', function ($stateParams, dataserv) {
+
+						return dataserv.getPerson($stateParams.id);
+					}]
+				}
 			});
 
 

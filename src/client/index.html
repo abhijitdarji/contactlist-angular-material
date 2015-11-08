@@ -40,12 +40,13 @@
 			<md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
 				<md-toolbar class="md-tall md-accent">
 					<div class="md-toolbar-tools-bottom inset">
-						<div>Demo</div>
+						<md-button ui-sref="contacts.all">Demo</md-button>
 						<div>Angular Material</div>
 					</div>
 				</md-toolbar>
 				<div layout-align="start center">
 					<md-button ng-click="shellvm.showToast()">My Contacts</md-button>
+					<md-button ui-sref="contacts.add">New Contact</md-button>
 				</div>
 			</md-sidenav>
 		</section>
