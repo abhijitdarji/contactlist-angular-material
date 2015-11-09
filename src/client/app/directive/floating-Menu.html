@@ -8,7 +8,7 @@ ng-mouseenter="fm.isOpen=true" ng-mouseleave="fm.isOpen=false">
 	</md-fab-trigger>
 	<md-fab-actions>
 		<div ng-repeat="item in fm.items">
-			<md-button aria-label="{{item.name}}" class="md-fab md-raised md-mini" ng-click="fm.openDialog($event, item)">
+			<md-button aria-label="{{item.name}}" class="md-fab md-raised md-mini" ui-sref="popupadd">
 				<md-tooltip md-direction="{{item.direction}}" md-visible="tooltipVisible" md-autohide="false">
 					{{item.toltip}}
 				</md-tooltip>

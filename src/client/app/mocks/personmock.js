@@ -42,7 +42,14 @@
 				+ adr.country();
 		};
 
-		$httpBackend.whenGET('/persons').respond(persons);
+		$httpBackend.whenGET('/person').respond(
+			function (method, url) {
+				//error testing
+				//return [500,];
+				
+				return [200, persons];
+			}
+		);
 
 		$httpBackend.whenGET(new RegExp('\\/person\\/[0-9]+')).respond(
 			function (method, url) {
@@ -57,6 +64,23 @@
 		// 		return [200, persons[Number(params.id)]];
 		// 	});
 		
+		
+		$httpBackend.whenPUT(new RegExp('\\/person\\/[0-9]+')).respond(function (method, url, data, headers) {
+
+			var regexp = new RegExp('\\/person\\/([0-9]+)');
+			var id = Number(url.match(regexp)[1]);
+			
+			persons[id] = angular.fromJson(data);
+
+			return [200, {}, {}];
+		});
+
+		$httpBackend.whenPOST('/person').respond(function (method, url, data, headers) {
+
+			persons.push(angular.fromJson(data));
+
+			return [200, {}, {}];
+		});
 
 	};
 

@@ -1,41 +1,65 @@
-<md-content layout-padding>
-	<img ng-src="{{vm.somePerson.photo}}" hide-sm>
-	<div layout layout-sm="column">
-		<md-input-container class="md-icon-float md-block" flex>
-			<label>First Name</label>
-			<md-icon style="color:blue;">assignment_ind</md-icon>
-			<input ng-model="vm.somePerson.first_name" type="text">
+<form name="personForm" ng-submit="vm.saveData()" novalidate role="form">
+	<md-content layout-padding>
+		<img ng-src="{{vm.somePerson.photo}}" hide-sm>
+		<div layout layout-sm="column">
+			<md-input-container class="md-icon-float md-block" flex>
+				<label>First Name</label>
+				<md-icon style="color:blue;">assignment_ind</md-icon>
+				<input ng-model="vm.somePerson.first_name" name="fname" type="text" ng-required="true">
+				<div ng-messages="personForm.fname.$error">
+					<div ng-messages-include="error-messages"></div>
+				</div>
+			</md-input-container>
+			<md-input-container class="md-icon-float md-block" flex>
+				<label>Last Name</label>
+				<input ng-model="vm.somePerson.last_name" name="lname" type="text" ng-required="true">
+				<div ng-messages="personForm.lname.$error">
+					<div ng-messages-include="error-messages"></div>
+				</div>
+			</md-input-container>
+		</div>
+		<md-input-container class="md-icon-float md-block">
+			<label>Company</label>
+			<md-icon>business</md-icon>
+			<input ng-model="vm.somePerson.company" type="text">
 		</md-input-container>
-		<md-input-container class="md-icon-float md-block" flex>
-			<label>Last Name</label>
-			<input ng-model="vm.somePerson.last_name" type="text">
+		<md-input-container md-no-float class="md-block">
+			<md-icon>phone</md-icon>
+			<input ng-model="vm.somePerson.phone" type="text" placeholder="Phone Number">
 		</md-input-container>
-	</div>
-	<md-input-container class="md-icon-float md-block">
-		<label>Company</label>
-		<md-icon>business</md-icon>
-		<input ng-model="vm.somePerson.company" type="text">
-	</md-input-container>
-	<md-input-container md-no-float class="md-block">
-		<md-icon>phone</md-icon>
-		<input ng-model="vm.somePerson.phone" type="text" placeholder="Phone Number">
-	</md-input-container>
-	<md-input-container class="md-block">
-		<md-icon style="color:green;">email</md-icon>
-		<input ng-model="vm.somePerson.email" type="email" placeholder="Email (required)" ng-required="true">
-	</md-input-container>
-	<md-input-container class="md-icon-float md-block">
-		<label>URL</label>
-		<md-icon>link</md-icon>
-		<input ng-model="vm.somePerson.url" type="text">
-	</md-input-container>
-	<md-input-container md-no-float class="md-block">
-		<md-icon>place</md-icon>
-		<input ng-model="vm.somePerson.address" type="text" placeholder="Address">
-	</md-input-container>
-	<md-datepicker ng-model="vm.somePerson.birthday" md-placeholder="Birth date"></md-datepicker>
-	<md-input-container md-no-float class="md-block">
-		<label>Biography</label>
-		<textarea ng-model="vm.somePerson.notes" columns="1" md-maxlength="150"></textarea>
-	</md-input-container>
-</md-content>
+		<md-input-container class="md-block">
+			<md-icon style="color:green;">email</md-icon>
+			<input ng-model="vm.somePerson.email" type="email" name="email" placeholder="Email (required)" ng-required="true">
+			<div ng-messages="personForm.email.$error">
+				<div ng-messages-include="error-messages"></div>
+			</div>
+		</md-input-container>
+		<md-input-container class="md-icon-float md-block">
+			<label>URL</label>
+			<md-icon>link</md-icon>
+			<input ng-model="vm.somePerson.url" type="text">
+		</md-input-container>
+		<md-input-container md-no-float class="md-block">
+			<md-icon>place</md-icon>
+			<input ng-model="vm.somePerson.address" type="text" placeholder="Address">
+		</md-input-container>
+		<md-datepicker ng-model="vm.somePerson.birthday" md-placeholder="Birth date"></md-datepicker>
+		<md-input-container md-no-float class="md-block">
+			<label>Notes</label>
+			<textarea ng-model="vm.somePerson.notes" name="notes" columns="1" md-maxlength="150"></textarea>
+			<div ng-messages="personForm.notes.$error">
+				<div ng-message="md-maxlength">Notes has to be less than 150 characters.</div>
+				<div ng-messages-include="error-messages"></div>
+			</div>
+		</md-input-container>
+	</md-content>
+	<md-button type="submit" class="md-accent" ng-class="{'md-raised md-hue-2': (personForm.$dirty && personForm.$valid)}" 
+	aria-label="Save Person" ng-disabled="personForm.$pristine || personForm.$invalid">
+		Save
+	</md-button>
+</form>
+
+<script type="text/ng-template" id="error-messages">
+	<div ng-message="required">This field is required</div>
+	<div ng-message="minlength">This field is too short</div>
+</script>

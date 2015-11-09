@@ -18,7 +18,7 @@
 		};
 
 		vm.showToast = function(){
-			toastServ.success('Something!');
+			toastServ.show('Something!');
 		}
 	// 	vm.showToast = function () {
 	// 		$mdToast.show({
