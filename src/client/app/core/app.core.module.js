@@ -8,6 +8,7 @@
 		'ngMaterial',
 		'ngMessages',
 		'ngResource',
+		'ngAnimate',
 		'app.service',
 		'app.directive'
 	]);

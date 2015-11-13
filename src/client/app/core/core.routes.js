@@ -1,3 +1,4 @@
+/* global faker */
 (function () {
 	'use strict'
 
@@ -49,6 +50,8 @@
 				url: '',
 				onEnter: ['$mdDialog', '$state', function ($mdDialog, $state) {
 					$mdDialog.show({
+						clickOutsideToClose: true, //default false
+						escapeToClose: true, //default true
 						controller: function ($scope) {
 							$scope.setHeader = function (textVal) {
 								$scope.headerText = textVal;
@@ -63,7 +66,7 @@
 						'		</div>' +
 						'	</md-toolbar>' +
 						'  	<md-dialog-content>' +
-						'    	<div ui-view="modal"></div>' +
+						'    	<div ui-view="modalx"></div>' +
 						'  	</md-dialog-content>' +
 						'</md-dialog>',
 					}).finally(function () {
@@ -75,61 +78,21 @@
 				url: '',
 				parent: 'modal',
 				views: {
-					'modal@': {
+					'modalx@': {
 						templateUrl: 'app/person/add-edit.html',
 						controller: 'personCtrl',
-						controllerAs: 'vm',
-						resolve: {
-							somePerson: function () {
-								var per = {
-									photo: faker.internet.avatar()
-								}
-								return per;
-							}
+						controllerAs: 'vm'
+					}
+				},
+				resolve: {
+					somePerson: function () {
+						var per = {
+							photo: faker.internet.avatar()
 						}
+						return per;
 					}
 				}
 			})
-		// .state('popupadd', {
-		// 	url: '/popupadd',
-		// 	parent: 'contacts.all',
-		// 	resolve: {
-		// 		somePerson: function () {
-		// 			var per = {
-		// 				photo: faker.internet.avatar()
-		// 			}
-		// 			return per;
-		// 		}
-		// 	},
-		// 	onEnter: [
-		// 		"$mdDialog",
-		// 		"somePerson",
-		// 		"$state",
-		// 		function ($mdDialog, somePerson, $state) {
-		// 			$mdDialog.show({
-		// 				clickOutsideToClose: true,
-		// 				template:
-		// 				'<md-dialog aria-label="Add">' +
-		// 				'	<md-toolbar>' +
-		// 				'		<div class="md-toolbar-tools">' +
-		// 				'			<h2>Add New Contact</h2>' +
-		// 				'				<span flex></span>' +
-		// 				'		</div>' +
-		// 				'	</md-toolbar>' +
-		// 				'  	<md-dialog-content>' +
-		// 				'    	<div ng-include="\'app/person/add-edit.html\'"></div>' +
-		// 				'  	</md-dialog-content>' +
-		// 				'</md-dialog>',
-		// 				controller: 'personCtrl',
-		// 				controllerAs: 'vm',
-		// 				locals: { somePerson: somePerson }
-		// 			}).finally(function () {
-		// 				console.log('hhhh');
-		// 				$state.go('contacts.all');
-		// 			});
-		// 		}
-		// 	]
-		// })
 			.state('contacts.edit', {
 				url: '/edit/:id',
 				templateUrl: 'app/person/add-edit.html',

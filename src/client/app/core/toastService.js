@@ -20,7 +20,6 @@
 		};
 
 		var service = {
-			_def: _def,
 			show: show,
 			success: success,
 			error: error,

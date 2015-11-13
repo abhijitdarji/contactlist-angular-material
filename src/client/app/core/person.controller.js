@@ -3,13 +3,13 @@
 
 	var moduleID = 'app.core';
 	var ctrlID = 'personCtrl';
-	var injectParams = ['fPerson', 'somePerson', '$stateParams', 'toastServ', '$state', '$scope'];
+	var injectParams = ['fPerson', 'somePerson', '$stateParams', 'toastServ', '$state', '$scope', '$mdDialog'];
 
 	angular.module(moduleID)
 		.controller(ctrlID, personCtrl);
 
 	personCtrl.$inject = injectParams;
-	function personCtrl(fPerson, somePerson, $stateParams, toastServ, $state, $scope) {
+	function personCtrl(fPerson, somePerson, $stateParams, toastServ, $state, $scope, $mdDialog) {
 		var vm = this;
 		vm.cardView = false;
 		vm.id;
@@ -26,7 +26,6 @@
 
 
 		function init() {
-
 			fPerson.query(function (data) {
 				vm.contacts = data;
 			});
@@ -46,7 +45,12 @@
 				//add
 				fPerson.save(vm.somePerson, function () {
 					toastServ.success('Saved! You are good');
-					$state.go('contacts.all');
+					if (angular.isDefined($scope.setHeader)) {
+						$mdDialog.hide();
+					}
+					else {
+						$state.go('contacts.all');
+					}
 				})
 			}
 			
