@@ -6,9 +6,9 @@
 	<title>ContactList Manager</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+
 	
-	
-	
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -17,35 +17,44 @@
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	<link rel="stylesheet" href="styles/lib-03a027231e.css">
+	<link rel="stylesheet" href="styles/lib-8c8047a9f3.css">
 
-	<link rel="stylesheet" href="styles/app-1bfc1d6af7.css">
+	<link rel="stylesheet" href="styles/app-e21ed8eadf.css">
 
 </head>
 
 <body layout="row" ng-controller="shellCtrl as shellvm" ng-cloak>
-
 	<div layout="column">
 		<section layout="row" flex>
 			<md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
 				<md-toolbar class="md-tall md-accent">
 					<div class="md-toolbar-tools-bottom inset">
-						<div>Demo</div>
-						<div>Angular Material</div>
+						<md-icon style="font-size:80px;">contact_phone</md-icon>
 					</div>
 				</md-toolbar>
 				<div layout-align="start center">
-					<md-button ng-click="shellvm.showToast()">My Contacts</md-button>
+					<md-list role="list" ng-cloak>
+						<md-list-item md-ink-ripple>
+							<div class="md-list-item-text" ui-sref="contacts.all" layout="row">
+								<md-icon>dashboard</md-icon>
+								<p>My Contacts</p>
+							</div>
+						</md-list-item>
+						<md-list-item md-ink-ripple>
+							<div class="md-list-item-text" ui-sref="contacts.add" layout="row">
+								<md-icon>person_add</md-icon>
+								<p>New Contact</p>
+							</div>
+						</md-list-item>
+					</md-list>
+					<md-divider></md-divider>
 				</div>
 			</md-sidenav>
 		</section>
 	</div>
 
 	<div layout="column" layout-fill>
-		<!--<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
-			<md-icon aria-label="Add">add</md-icon>
-		</md-button>-->
-		
+		<md-progress-linear class="md-warn" md-mode="indeterminate" when-loading></md-progress-linear>
 		<floating-menu></floating-menu>
 
 		<section layout="row">
@@ -54,7 +63,7 @@
 					<md-button ng-click="shellvm.toggleSidenav('left')" hide-gt-sm class="md-icon-button">
 						<md-icon aria-label="Menu">menu</md-icon>
 					</md-button>
-					<h1> <md-icon aria-label="Phone">phone</md-icon>Contact List Manger</h1>
+					<h1> <md-icon aria-label="Phone">phone</md-icon>Angular Material - Contact(s) Manager</h1>
 				</div>
 			</md-toolbar>
 		</section>
@@ -63,7 +72,7 @@
 			<md-content layout="column" flex class="md-padding">
 				<md-card>
 					<md-card-content>
-						<div ui-view></div>
+						<div ui-view class="shuffle-animation" ng-cloak></div>
 					</md-card-content>
 				</md-card>
 
@@ -71,9 +80,9 @@
 		</section>
 	</div>
 
-	<script src="js/lib-9ccd6e8d5f.js"></script>
+	<script src="js/lib-14ba7268dd.js"></script>
 
-	<script src="js/app-48c20ce224.js"></script>
+	<script src="js/app-0141d9cf6e.js"></script>
 
 </body>
 
