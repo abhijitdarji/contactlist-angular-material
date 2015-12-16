@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="clApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ContactList Manager</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+
+	
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<link rel="stylesheet" href="styles/lib-bcd5637e9f.css">
+
+	<link rel="stylesheet" href="styles/app-e21ed8eadf.css">
+
+</head>
+
+<body layout="row" ng-controller="shellCtrl as shellvm" ng-cloak>
+	<div layout="column">
+		<section layout="row" flex>
+			<md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+				<md-toolbar class="md-tall md-accent">
+					<div class="md-toolbar-tools-bottom inset">
+						<md-icon style="font-size:80px;">contact_phone</md-icon>
+					</div>
+				</md-toolbar>
+				<div layout-align="start center">
+					<md-list role="list" ng-cloak>
+						<md-list-item md-ink-ripple>
+							<div class="md-list-item-text" ui-sref="contacts.all" layout="row">
+								<md-icon>dashboard</md-icon>
+								<p>My Contacts</p>
+							</div>
+						</md-list-item>
+						<md-list-item md-ink-ripple>
+							<div class="md-list-item-text" ui-sref="contacts.add" layout="row">
+								<md-icon>person_add</md-icon>
+								<p>New Contact</p>
+							</div>
+						</md-list-item>
+					</md-list>
+					<md-divider></md-divider>
+				</div>
+			</md-sidenav>
+		</section>
+	</div>
+
+	<div layout="column" layout-fill>
+		<md-progress-linear class="md-warn" md-mode="indeterminate" when-loading></md-progress-linear>
+		<floating-menu></floating-menu>
+
+		<section layout="row">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<md-button ng-click="shellvm.toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+						<md-icon aria-label="Menu">menu</md-icon>
+					</md-button>
+					<h1> <md-icon aria-label="Phone">phone</md-icon>Angular Material - Contact(s) Manager</h1>
+				</div>
+			</md-toolbar>
+		</section>
+
+		<section layout="row" flex id="content">
+			<md-content layout="column" flex class="md-padding">
+				<md-card>
+					<md-card-content>
+						<div ui-view class="shuffle-animation" ng-cloak></div>
+					</md-card-content>
+				</md-card>
+
+			</md-content>
+		</section>
+	</div>
+
+	<script src="js/lib-06e1daaf21.js"></script>
+
+	<script src="js/app-0141d9cf6e.js"></script>
+
+</body>
+
+</html>

@@ -63,9 +63,8 @@ gulp.task('serve-build', ['build'], function () {
  * --debug-brk or --debug
  * --nosync
  * @param  {Boolean} isDev - dev or build mode
- * @param  {Boolean} specRunner - server spec runner html
  */
-function serve(isDev, specRunner) {
+function serve(isDev) {
     var server;
     util.log('starting live-server');
 
